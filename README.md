@@ -22,6 +22,8 @@ Go 1.9+ is required!
 - [Install](#install)
 - [Last changes](#last-changes)
 - [Example](#example)
+- [engineio](#engineo)
+- [Community](#community)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -41,13 +43,12 @@ import "github.com/googollee/go-socket.io"
 
 and use `socketio` as the package name inside the code.
 
-## Last changes
-
-*Important changes:*
+## Breaking changes
 
 | Short info | Description | Date |
 |------------|-------------|------------|
 | Changed signature of `OnError`  | Changed signature of `OnError` *From:* `server.OnError(string, func(error))` *To:* `server.OnError(string, func(Conn, error))` | 2019-10-16 |
+| Moved googollee/go-engine.io | Breaking! You need to update imports from github.com/googollee/go-engine.io to github.com/googollee/go-socket.io/engineio and remove github.com/googollee/go-engine.io from your `go.mod` and other dependency files | 2020-09-11 |
 
 
 ## Example
@@ -183,7 +184,7 @@ socket.on('some:event', function (msg) {
 ```
 
 
-##### Cautch Disconnected reason
+##### Catch Disconnected reason
 
 * Server-side
 
@@ -201,6 +202,11 @@ Possible reasons:
 |------------|-------------|------------|
 | client namespace disconnect | Client Side | Got disconnect packet from client |
 
+## engineio
+
+This project contains a sub-package called `engineio`. This used to be a separate package under https://github.com/googollee/go-engine.io.
+
+It contains the `engine.io` analog implementation of the original node-package. https://github.com/socketio/engine.io It can be used without the socket.io-implementation. Please check the README.md in `engineio/`.
 
 ## Community
 

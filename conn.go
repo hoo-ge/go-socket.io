@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"sync"
 
-	engineio "github.com/googollee/go-engine.io"
+	engineio "github.com/googollee/go-socket.io/engineio"
 
 	"github.com/googollee/go-socket.io/parser"
 )
@@ -104,6 +104,11 @@ func (c *conn) connect() error {
 	root := newNamespaceConn(c, "/", rootHandler.broadcast)
 	c.namespaces[""] = root
 	root.Join(root.ID())
+
+	for _, ns := range c.namespaces {
+		ns.SetContext(c.Conn.Context())
+	}
+
 	header := parser.Header{
 		Type: parser.Connect,
 	}

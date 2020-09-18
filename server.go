@@ -3,7 +3,7 @@ package socketio
 import (
 	"net/http"
 
-	engineio "github.com/googollee/go-engine.io"
+	engineio "github.com/googollee/go-socket.io/engineio"
 )
 
 // Server is a go-socket.io server.
@@ -136,6 +136,11 @@ func (s *Server) Rooms(namespace string) []string {
 		return nspHandler.broadcast.Rooms(nil)
 	}
 	return nil
+}
+
+// Count number of connections
+func (s *Server) Count() int {
+	return s.eio.Count()
 }
 
 func (s *Server) ForEach(namespace string, room string, f EachFunc) bool {
